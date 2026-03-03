@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SUSH" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <HEAD>
+    <NAME>Z_P2P0006_OTB_PGI_RFC</NAME>
+    <TYPE>RF</TYPE>
+    <DISPLAY_NAME>Z_P2P0006_OTB_PGI_RFC</DISPLAY_NAME>
+    <STEXT>GPC: post goods issue - safe way to avoid direct messages</STEXT>
+   </HEAD>
+  </asx:values>
+ </asx:abap>
+</abapGit>

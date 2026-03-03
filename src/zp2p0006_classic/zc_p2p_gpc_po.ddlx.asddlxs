@@ -1,0 +1,26 @@
+@Metadata.layer: #CORE
+annotate entity ZC_P2P_GPC_PO
+  with 
+{
+  @UI.hidden: true
+  GatePassID;
+  @UI.lineItem: [{ position: 10  }]
+  GatePassItemID;
+  
+  @Consumption.valueHelpDefinition: [{
+     entity: {
+         name: 'ZC_P2P_GPC_PurchaseOrderVH',
+         element: 'PurchaseOrder'
+     },
+     distinctValues: true,
+     useForValidation: true,
+     additionalBinding: [{
+       element: 'TranspPlanPoint',
+       localElement: '_InbGatePass.TranspPlanPoint',
+       usage: #FILTER
+     }]         
+  }]  
+  @UI.lineItem: [{ position: 20  }]
+  PurchaseOrder;
+  
+}

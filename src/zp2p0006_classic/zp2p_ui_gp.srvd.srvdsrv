@@ -1,0 +1,11 @@
+@EndUserText.label: 'GPC: service definition'
+define service ZP2P_UI_GP {
+  expose ZC_P2P_INBGATEPASS;
+  expose ZC_P2P_INBGATEPASSITEM;
+  expose ZC_P2P_INBGATEPASSDLVITEM;
+  expose ZC_P2P_GPC_PO;
+  expose ZC_P2P_OTBGATEPASS;
+  expose ZC_P2P_OTBGATEPASSITEM;
+  expose ZC_P2P_OTBGATEPASSDLVITEM;
+  expose ZI_UserContactCard;
+}

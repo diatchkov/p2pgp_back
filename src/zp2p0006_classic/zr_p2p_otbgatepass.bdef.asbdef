@@ -1,0 +1,199 @@
+managed implementation in class zbp_r_p2p_otbgatepass unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZR_P2P_OTBGATEPASS alias OtbGatePass
+lock master
+total etag ZZChangedTimestamp
+draft table ztp2p_d_otbgp
+authorization master ( instance )
+late numbering
+with unmanaged save
+{
+  field ( readonly : update )
+  GatePassID;
+
+  field ( readonly )
+  WBNetWeight,
+  TruckCapacityUnit,
+  EntryDate,
+  EntryTime,
+  EntryUser,
+  ExitDate,
+  ExitTime,
+  ExitUser;
+
+  field ( features : instance )
+  ContainerID,
+  ContainerWeight,
+  ContainerUnit,
+  SealNumber,
+  WBSafetyCheck,
+  WBManual,
+  WBManualReason,
+  WBDeviceID,
+  WBTareWeight,
+  WBGrossWeight,
+  WBUnit;
+
+  mapping for bapishipmentheader control bapishipmentheaderaction corresponding
+    {
+      GatePassID           = shipment_num;
+      GatePassType         = shipment_type;
+      TranspPlanPoint      = trans_plan_pt;
+      ProcessingIndicator  = special_procedure_id;
+      ContainerID          = container_id;
+      BillOfLanding        = external_id_1;
+      OrderNumber          = external_id_2;
+      OrderNumberItem      = zzebelp;
+      Transporter          = service_agent_id;
+      RFID                 = text_1;
+      RadiationCertificate = text_2;
+      SealNumber           = text_3;
+      TruckGUID            = zztruck_guid;
+      TruckID              = zztruck_id;
+      TruckType            = zztruck_type;
+      TruckInsuranceNumber = zztruck_insurance_number;
+      TruckInsuranceDate   = zztruck_insurance_date;
+      TruckCapacity        = zztruck_capacity;
+      TruckCapacityUnit    = zztruck_capacity_unit;
+      DriverGUID           = zzdriver_guid;
+      DriverName           = zzdriver_name;
+      DriverPhone          = zzdriver_phone;
+      DriverLicense        = zzdriver_license;
+      EntryUser            = zzentry_user;
+      EntryReason          = zzentry_reason;
+      ExitUser             = zzexit_user;
+      WBNotRelevant        = zzwb_not_relevant;
+      WBSafetyCheck        = zzwb_safety_check;
+      WBDeviceID           = zzwb_device_id;
+      WBManual             = zzwb_manual;
+      WBManualReason       = zzwb_manual_reason;
+      WBNotes              = zzwb_notes;
+      WBTareWeight         = zzwb_tare_weight;
+      WBGrossWeight        = zzwb_gross_weight;
+      WBNetWeight          = zzwb_net_weight;
+      WBUnit               = zzwb_unit;
+      isBulk               = zzbulk;
+      isScrap              = zzscrap;
+      isReturn             = zzreturn;
+      isLogicallyDeleted   = zzdeleted;
+      ContainerWeight      = zzct_gross_weight;
+      ContainerUnit        = zzct_unit;
+      Pieces               = zzpiececount;
+    }
+
+  mapping for zsp2p0006_likp control zsp2p0006_likp_control corresponding
+    {
+      BillOfLanding  = lifex;
+      WBGrossWeight  = zzgross_weight;
+      WBTareWeight   = zztare_weight;
+      WBNetWeight    = zznet_weight;
+      WBUnit         = zzunit;
+      TruckGUID      = zztruck_guid;
+      TruckID        = zztruck_id;
+      DriverGUID     = zzdriver_guid;
+      DriverName     = zzdriver_name;
+      WBManual       = zzwbmanual_dlh;
+      WBManualReason = zzwb_manual_reason;
+      WBNotes        = zzwb_notes;
+    }
+
+  mapping for zsp2p0006_lips control zsp2p0006_lips_control corresponding
+    {
+      Pieces  = zzpiececount_dli;
+    }
+
+  create ( features : global );
+  update;
+  delete ( features : instance );
+
+  determination DetermineDefaultValuesForHead on modify { create; }
+  determination calcWBNetWeight on modify { field WBGrossWeight, WBTareWeight; }
+  determination calcGatePassType on modify { field TranspPlanPoint, Transporter, OrderNumber, ProcessingIndicator; }
+  determination calcBulk on modify { field TruckType; }
+
+  validation checkObligFields on save { create; update; }
+  validation checkGrossWeight on save { create; update; field WBGrossWeight; }
+
+  draft action Resume;
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Discard;
+
+  draft determine action Prepare;
+
+  action ( authorization : global, features : instance ) GetWBTareWeight;
+  action ( authorization : global, features : instance ) GetWBGrossWeight;
+
+  action ( authorization : global, features : instance ) GetGPEntry;
+  action ( authorization : global, features : instance ) GetGPExit;
+
+  action ( authorization : global, features : instance ) PrintGPEntry result [1] ZD_P2P_GP_PRINT;
+  action ( authorization : global, features : instance ) PrintGPExit result [1] ZD_P2P_GP_PRINT;
+  action ( authorization : global, features : instance ) PostGI;
+  action ( authorization : global, features : instance ) PostGIWithTolerance parameter ZD_P2P_OTB_POSTGI_PARAMS;
+
+  association _Item { create; }
+}
+
+define behavior for ZR_P2P_OTBGATEPASSITEM alias OtbGatePassItem
+lock dependent by _OtbGatePass
+draft table ztp2p_d_otbgpi
+authorization dependent by _OTBGatePass
+etag master ZZChangedTimestamp
+late numbering
+with unmanaged save
+{
+  field ( readonly : update ) GatePassID, GatePassItemID;
+
+  update;
+  delete;
+
+  action ( authorization : global, features : instance ) PrintNote result [1] ZD_P2P_GP_PRINT;
+  action ( authorization : global, features : instance ) PrintPlanNote result [1] ZD_P2P_GP_PRINT;
+  action ( authorization : global, features : instance ) PrintQualCert result [1] ZD_P2P_GP_PRINT;
+  action ( authorization : global, features : instance ) PrintTaxInvoice result [1] ZD_P2P_GP_PRINT;
+  action ( authorization : global, features : instance ) PrintAdvInvoice result [1] ZD_P2P_GP_PRINT;
+
+  association _OTBGatePass;
+  association _OTBGatePassDlvItem { create; with draft; }
+}
+
+define behavior for ZR_P2P_OTBGATEPASSDLVITEM alias OtbGatePassDlvItem
+lock dependent by _OtbGatePass
+draft table ztp2p_d_otbgpdi
+authorization dependent by _OTBGatePass
+etag master ZZChangedTimestamp
+late numbering
+with unmanaged save
+{
+  field ( readonly )
+    GatePassID,
+    GatePassItemID,
+    DeliveryDocument,
+    DeliveryDocumentItem,
+    MainItem,
+    Plant,
+    StorageLocation,
+    Material,
+    BatchWeight,
+    BatchUOM,
+    ActualDeliveryQuantity,
+    DeliveryQuantityUnit;
+
+  field ( features : instance )
+    Batch,
+    Billets;
+
+  update ( features : instance );
+  delete ( features : instance );
+
+  action ( features : instance ) BatchSplit;
+
+  determination calcQuantity on modify { field Billets; delete; }
+  determination calcBatch on modify { field Batch; }
+
+  association _OtbGatePassItem;
+  association _OtbGatePass;
+}

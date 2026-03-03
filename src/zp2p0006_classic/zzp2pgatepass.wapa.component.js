@@ -1,0 +1,2 @@
+sap.ui.define(["sap/suite/ui/generic/template/lib/AppComponent"],function(e){"use strict";return e.extend("ae.emsteel.asas.p2pgatepass.Component",{metadata:{manifest:"json"}})});                                                                             
+//# sourceMappingURL=Component.js.map                                                                                                                                                                                                                          

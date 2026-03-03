@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>GPC: messages</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Goods Receipt &amp;1(&amp;2) posted successfully.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Goods Issue to crusher &amp;1(&amp;2) posted successfully.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Goods Issue for outbound delivery &amp;1 posted (material document &amp;2)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>Gate pass not found for delivery &amp;1.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>More than one gate pass found for delivery &amp;1.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>Field &apos;&amp;1&apos; is obligatory.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>The shipment cost document has not been created for gate pass &amp;1.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>Gross weight exceeds Container gross weight.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>Delivery &amp;1: tax invoice is not found.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>Delivery &amp;1: advance invoice is not found.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>Delivery &amp;1: quality certificate is not found.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>012</MSGNR>
+     <TEXT>Delivery &amp;1: delivery note not found.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZP2P_0006_CLASSIC</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>Gate pass &amp;1: BoL &amp;2 does not exist in the system.</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

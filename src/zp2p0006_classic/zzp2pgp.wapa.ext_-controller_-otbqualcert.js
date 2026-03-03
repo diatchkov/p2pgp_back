@@ -1,0 +1,3 @@
+sap.ui.define(["ae/emsteel/asas/p2pgp/utils/common"],function(e){"use strict";return{Print:async function(t){var a=t.getModel();var s=this;var i=s.byId("ae.emsteel.asas.p2pgp::ZC_P2P_OTBGATEPASSObjectPage--fe::table::_Item::LineItem::Table");var n=i.getS+
+electedContexts();var o=await this.getEditFlow().invokeAction("com.sap.gateway.srvd.zp2p_ui_gp.v0001.PrintQualCert",{contexts:n[0],model:a});var r=o.getObject();e.openPDFFromBase64(r)}}});                                                                   
+//# sourceMappingURL=OtbQualCert.js.map                                                                                                                                                                                                                        

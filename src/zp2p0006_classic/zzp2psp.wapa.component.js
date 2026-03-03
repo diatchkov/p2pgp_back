@@ -1,0 +1,2 @@
+sap.ui.define(["sap/fe/core/AppComponent"],function(e){"use strict";return e.extend("ae.emsteel.asas.p2psp.Component",{metadata:{manifest:"json"}})});                                                                                                         
+//# sourceMappingURL=Component.js.map                                                                                                                                                                                                                          

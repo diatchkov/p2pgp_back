@@ -1,0 +1,6 @@
+@EndUserText.label: 'Access control for ZC_P2P_INBGATEPASS'
+@MappingRole: true
+define role ZC_P2P_INBGATEPASS {
+  grant select on ZC_P2P_INBGATEPASS
+  where inheriting conditions from entity ZR_P2P_INBGATEPASS;           
+}

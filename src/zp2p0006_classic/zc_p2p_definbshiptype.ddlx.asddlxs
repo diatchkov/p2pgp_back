@@ -1,0 +1,87 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'ZP2PDefInbShipType', 
+    typeNamePlural: 'ZP2PDefInbShipTypes', 
+    title: {
+      type: #STANDARD, 
+      label: 'GPC: default inbound shipment types', 
+      value: 'Tplst'
+    }
+  }
+}
+annotate view ZC_P2P_DefInbShipType with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  } ]
+  @UI.facet: [ {
+    id: 'ZI_P2P_DefInbShipType', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'GPC: default inbound shipment types', 
+    position: 1 
+  } ]
+  
+  @Consumption.valueHelpDefinition: [{
+    entity: {
+        name: 'ZC_P2P_TRPOINTVH',
+        element: 'TranspPlanPoint'
+    },
+    distinctValues: true,
+    useForValidation: true
+  }]
+  Tplst;
+  
+  @UI.identification: [ {
+    position: 2 
+  } ]
+  @UI.lineItem: [ {
+    position: 2 
+  } ]
+  
+  @Consumption.valueHelpDefinition: [{
+      entity: {
+          name: 'ZC_P2P_SHIPMENT_TYPEVH',
+          element: 'ShipmentType'
+      },
+      distinctValues: true,
+      useForValidation: true
+  }]  
+  Shtyp;
+  
+  @UI.identification: [ {
+    position: 3 
+  } ]
+  @UI.lineItem: [ {
+    position: 3 
+  } ]  
+  CheckTolerance; 
+
+  @UI.identification: [ {
+    position: 4 
+  } ]
+  @UI.lineItem: [ {
+    position: 4 
+  } ]  
+  SaveBCF; 
+  
+  @UI.identification: [ {
+    position: 5 
+  } ]
+  @UI.lineItem: [ {
+    position: 5 
+  } ]  
+  AddTransporter;
+  
+  @UI.identification: [ {
+    position: 6 
+  } ]
+  @UI.lineItem: [ {
+    position: 6 
+  } ]  
+  FillBulk;  
+}

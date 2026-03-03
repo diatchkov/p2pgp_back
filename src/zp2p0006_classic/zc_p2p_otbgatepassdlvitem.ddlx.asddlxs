@@ -1,0 +1,108 @@
+@Metadata.layer: #CORE
+@UI.createHidden: true
+
+annotate entity ZC_P2P_OTBGATEPASSDLVITEM with
+{
+  @UI.lineItem: [ 
+    { importance: #HIGH,
+      position: 10,
+      type: #WITH_INTENT_BASED_NAVIGATION,
+      semanticObject: 'OutboundDelivery',
+      semanticObjectAction: 'displayInWebGUI',
+      semanticObjectBinding: [{
+      element: 'OutboundDelivery',
+      localElement: 'DeliveryDocument' }]
+    }, { 
+      type: #FOR_ACTION,
+      dataAction: 'BatchSplit',
+      label: 'Batch split',
+      importance: #MEDIUM,
+      position: 901 
+  }]
+  DeliveryDocument;
+
+  @UI.lineItem: [ {
+    importance: #HIGH,
+    position: 20 } ]
+  DeliveryDocumentItem;
+ 
+  @UI.lineItem: [ {
+    importance: #HIGH,
+    position: 30 } ]  
+  MainItem;
+  
+  @UI.lineItem: [ {
+    importance: #LOW,
+    position: 50 } ]
+  Plant;
+
+  @UI.lineItem: [ {
+    importance: #LOW,
+    position: 60 } ]
+  StorageLocation;
+
+  @UI.lineItem: [ {
+    importance: #HIGH,
+    position: 70 } ]
+  Material;
+
+  @UI.lineItem: [ {
+    importance: #HIGH,
+    position: 80 } ]
+  Batch;
+
+  @UI.lineItem: [ {
+    label: 'Billets',
+    importance: #HIGH,
+    position: 90 } ]
+  Billets;
+
+  @UI.lineItem: [ {
+    label: 'Batch weight',
+    importance: #HIGH,
+    position: 100 } ]
+  BatchWeight;
+
+  @UI.lineItem: [ {
+    importance: #HIGH,
+    position: 110 } ]
+  ActualDeliveryQuantity;    
+      
+  @UI.lineItem: [ {
+    importance: #LOW,
+    position:  120 } ]
+  CountryOfOrigin;
+
+  @UI.lineItem: [ {
+    importance: #LOW,
+    position: 130 } ]
+  OrderQuantity;
+
+  @UI.lineItem: [ {
+    importance: #LOW,
+    position: 140 } ]
+  OverdelivTolrtdLmtRatioInPct;
+
+  @UI.lineItem: [ {
+    importance: #HIGH,
+    position: 150 } ]
+  UnderdelivTolrtdLmtRatioInPct;
+
+  @UI.lineItem: [ {
+    label: 'Delivered quantity',
+    importance: #HIGH,
+    position: 160 } ]
+  DeliveredQuantity;
+  
+  @UI.lineItem: [ {
+    label: 'Truck quantity',
+    importance: #HIGH,
+    position: 140 } ]
+  TruckQuantity;
+    
+  @UI.lineItem: [ {
+    importance: #HIGH,
+    position: 170 } ]
+  Bundle;  
+
+}

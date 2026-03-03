@@ -1,0 +1,3 @@
+sap.ui.define(["ae/emsteel/asas/p2psp/utils/common"],function(t){"use strict";return{Print:async function(e){var n=this.getBindingContext();var i=e.getModel();var a=await this.getEditFlow().invokeAction("com.sap.gateway.srvd.zp2p_ui_gp.v0001.PrintGPEntry+
+",{contexts:n,model:i});var s=a.getObject();t.openPDFFromBase64(s)}}});                                                                                                                                                                                        
+//# sourceMappingURL=GPEntry.js.map                                                                                                                                                                                                                            

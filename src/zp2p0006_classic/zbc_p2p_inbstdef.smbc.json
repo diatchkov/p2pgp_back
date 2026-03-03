@@ -1,0 +1,36 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "GPC: default inbound shipment types",
+    "originalLanguage": "en"
+  },
+  "serviceConfiguration": {
+    "serviceBinding": "ZP2P_UI_INBSTDEF_O4",
+    "serviceName": "ZP2P_UI_INBSTDEF_O4",
+    "serviceVersion": "0001",
+    "rootEntitySet": "ZP2PDefInbShipTypes",
+    "name": "GPC: default inbound shipment types",
+    "configurationGroup": "",
+    "skipRootEntity": true
+  },
+  "appConfiguration": {
+    "listReport": {},
+    "objectPages": [
+      {
+        "entitySet": "ZP2PDefInbShipTypes",
+        "variantManagement": "control"
+      }
+    ],
+    "tableSettings": [
+      {
+        "entitySet": "ZP2PDefInbShipType",
+        "tableType": "gridTable",
+        "creationModeName": "creationRow",
+        "createAtEnd": true,
+        "condensedTableLayout": true,
+        "enableFullScreen": true,
+        "rowCountMode": "auto"
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+@EndUserText.label: 'Access control for ZI_P2P_GATEPASS'
+@MappingRole: true
+define role ZI_P2P_GATEPASS {
+  grant select on ZI_P2P_GATEPASS
+  where ( TranspPlanPoint ) = aspect pfcg_auth('V_VTTK_TDS', TPLST , ACTVT = '03' );    
+}

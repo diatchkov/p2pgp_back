@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>GPC: RFC to avoid direct msg in standard</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZFG_P2P0006_GP_RFCTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZFG_P2P0006_GP_RFC</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>Z_P2P0006_INB_DLV_CREATE_RFC</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>GPC: create bulk delivery</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IT_ITEMS</PARAMETER>
+       <TYP>SHP_KOMDLGN_T</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_DELIVERYDOCUMENT</PARAMETER>
+       <TYP>VBELN_VL</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ET_RETURN</PARAMETER>
+       <TYP>BAPIRETTAB</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IT_ITEMS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>General Delivery Interface: Communication Table</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_DELIVERYDOCUMENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Delivery</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table of BAPI return information</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_P2P0006_OTB_PGI_RFC</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>GPC: post goods issue - safe way to avoid direct messages</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_DELIVERYDOCUMENT</PARAMETER>
+       <TYP>VBELN_VL</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ES_ERROR_LOG</PARAMETER>
+       <TYP>VBFS</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ET_PROTOCOL</PARAMETER>
+       <TYP>TAB_PROTT</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_DELIVERYDOCUMENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Delivery</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ES_ERROR_LOG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Error Log for Collective Processing</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_PROTOCOL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Log for Picking Report</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

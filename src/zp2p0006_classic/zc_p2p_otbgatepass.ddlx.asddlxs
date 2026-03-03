@@ -1,0 +1,461 @@
+@Metadata.layer: #CORE
+
+@UI.selectionPresentationVariant: [{
+    qualifier: 'SPVOtbGatePass',
+    selectionVariantQualifier: 'SVOtbGatePass',
+    presentationVariantQualifier: 'PVOtbGatePass'
+  }]
+
+@UI.presentationVariant: [{
+    qualifier: 'PVOtbGatePass',
+    visualizations: [ { type: #AS_LINEITEM } ]
+}]
+
+@UI.selectionVariant: [{
+    qualifier: 'SVOtbGatePass'
+}]
+
+@UI.headerInfo: {
+    typeName: 'Outbound gate pass',
+    typeImageUrl: 'sap-icon://shipping-status' }
+
+annotate entity ZC_P2P_OTBGATEPASS with
+{
+  @UI.facet: [
+     { purpose: #HEADER,
+       type: #FIELDGROUP_REFERENCE,
+       targetQualifier: 'statusInfo',
+       position: 01 },
+         
+    { purpose: #STANDARD,
+      type: #COLLECTION,
+      id: 'GeneralCollection',
+      position: 10,
+      label: 'General' },
+  
+    { purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      id: 'HeadInfo',
+      position: 10,
+      parentId: 'GeneralCollection' },
+  
+    { purpose: #STANDARD,
+      type: #COLLECTION,
+      id: 'TDInfo',
+      position: 20,
+      label: 'Truck and driver Information' },
+  
+    { purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'TRInfo',
+      position: 10,
+      parentId: 'TDInfo',
+      label: 'Truck Information' },
+  
+    { purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'DRInfo',
+      position: 20,
+      parentId: 'TDInfo',
+      label: 'Driver Information' },
+
+    { purpose: #STANDARD,
+      type: #COLLECTION,
+      targetQualifier: 'adminInfo',
+      id: 'adminInfo',
+      position: 30,
+      label: 'Administrative Information' },
+  
+    { purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'adminInfoNotes',
+      position: 10,
+      parentId: 'adminInfo' },
+  
+    { purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'adminInfoEntry',
+      position: 20,
+      parentId: 'adminInfo',
+      label: 'Entry' },
+  
+    { purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'adminInfoExit',
+      position: 30,
+      parentId: 'adminInfo',
+      label: 'Exit' }, 
+
+     { purpose: #STANDARD,
+       type: #COLLECTION,
+       id: 'itemCollection',       
+       position: 40,
+       label: 'Items' },
+
+     { purpose: #STANDARD,
+       type: #FIELDGROUP_REFERENCE,
+       targetQualifier: 'itemInfo',
+       position: 10,
+       parentId: 'itemCollection' },
+                            
+     { purpose: #STANDARD,
+       type: #LINEITEM_REFERENCE,
+       targetElement: '_Item',
+       position: 20,
+       parentId: 'itemCollection' },
+         
+    { purpose: #STANDARD,
+      type: #COLLECTION,
+      targetQualifier: 'WBInfo',
+      id: 'WBInfo',
+      position: 50,
+      label: 'Weighbridge Information' },
+
+    { purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'WBInfoDevice',
+      position: 10,
+      parentId: 'WBInfo',
+      label: 'General' },
+
+    { purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'WBInfoTare',
+      position: 20,
+      parentId: 'WBInfo',
+      label: 'Tare weight' },
+       
+    { purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'WBInfoGross',
+      position: 30,
+      parentId: 'WBInfo',
+      label: 'Gross weight' },
+    
+    { purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'WBInfoRemarks',
+      position: 40,
+      parentId: 'WBInfo' }]
+
+  @UI.identification: [ 
+    { type: #FOR_ACTION,
+      dataAction: 'PrintGPEntry',
+      label: 'Print entry',
+      importance: #MEDIUM,
+      hidden: true,
+      position: 901 },
+    { type: #FOR_ACTION,
+      dataAction: 'PrintGPExit',
+      label: 'Print exit',
+      importance: #MEDIUM,
+      hidden: true,
+      position: 902 },
+    { type: #FOR_ACTION,
+      dataAction: 'PostGI',
+      label: 'Post GI',
+      importance: #HIGH,
+      position: 903 },
+    { type: #FOR_ACTION,
+      dataAction: 'PostGIWithTolerance',
+      label: 'Post GI with tolerance',
+      importance: #HIGH,
+      position: 904 } ]
+
+  @UI.fieldGroup: [{
+    label: 'Gate pass ID',
+    position: 10,
+    qualifier: 'statusInfo' }]
+          
+  @UI.lineItem: [ { position: 10 } ]
+  @EndUserText.label: 'Gate pass ID'
+  @UI.selectionField: [{ position: 10 }]
+  GatePassID;
+
+  @UI.fieldGroup: [{
+    label: 'Status',
+    position: 20,
+    criticality: 'StatusCriticality',
+    criticalityRepresentation: #WITH_ICON,
+    qualifier: 'statusInfo' }]
+
+  @UI.lineItem: [ {
+    position: 20,
+    importance: #HIGH,
+    criticalityRepresentation: #WITH_ICON,
+    criticality: 'StatusCriticality' } ]
+  @UI.textArrangement: #TEXT_ONLY
+  Status;
+  
+  @UI.hidden: true
+  StatusText;
+
+  @UI.hidden: true
+  StatusCriticality; 
+  
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.identification: [ { position: 20 } ]
+  @EndUserText.label: 'Transportation Planning Point'
+  TranspPlanPoint;
+
+  @UI.lineItem: [ { position: 40 } ]
+  @UI.identification: [ { position: 30 } ]
+  @EndUserText.label: 'Type'
+  GatePassType;
+
+  @UI.hidden: true
+  GatePassDirection;
+
+  @UI.lineItem: [ { position: 70 } ]
+  @UI.identification: [ { position: 40 } ]
+  @EndUserText.label: 'Transporter'
+  Transporter;
+  
+  @UI.lineItem: [ { position: 50 } ]
+  @UI.fieldGroup: [ { qualifier: 'itemInfo', position: 10 } ]
+  @EndUserText.label: 'Bill of lading / External Delivery ID'
+  BillOfLanding;
+
+  @UI.lineItem: [ { position: 60 } ]
+  @UI.identification: [ { position: 70 } ]
+  @EndUserText.label: 'Sales order'
+  OrderNumber;
+  
+  @UI.lineItem: [ { position: 80 } ]
+  @UI.identification: [ { position: 80 } ]
+  @EndUserText.label: 'RFID'
+  RFID;
+  
+  @UI.hidden: true
+  isScrap;
+  
+  @UI.hidden: true
+  RadiationCertificateBody;
+
+  @UI.hidden: true
+  RadiationCertificateFile;
+
+  @UI.hidden: true
+  RadiationCertificateType;
+
+  @UI.lineItem: [ { position: 110 } ]
+  @UI.fieldGroup: [ { qualifier: 'itemInfo', position: 20 } ]
+  isBulk;
+
+  @UI.identification: [ { position: 120 } ]
+  @EndUserText.label: 'Return'
+  isReturn;
+
+  @UI.identification: [ { position: 130 } ]
+  @EndUserText.label: 'Not relevant for weightning'  
+  WBNotRelevant;
+  
+  @UI.hidden: true
+  isLogicallyDeleted;
+  
+  @UI.fieldGroup: [ { qualifier: 'TRInfo', position: 10 } ]
+  TruckID;
+
+  @UI.fieldGroup: [ { qualifier: 'TRInfo', position: 20 } ]
+  TruckType;
+
+  @UI.lineItem: [ { position: 90 } ]
+  @UI.fieldGroup: [ { qualifier: 'TRInfo', position: 30 } ]
+  @EndUserText.label: 'Container ID'
+  ContainerID;
+
+  @UI.lineItem: [ { position: 100 } ]
+  @UI.fieldGroup: [ { qualifier: 'TRInfo', position: 40 } ]
+  @EndUserText.label: 'Seal number'
+  SealNumber;
+  
+  @UI.fieldGroup: [ { qualifier: 'TRInfo', position: 50 } ]
+  TruckInsuranceNumber;
+
+  @UI.fieldGroup: [ { qualifier: 'TRInfo', position: 60 } ]
+  TruckInsuranceDate;
+
+  @UI.hidden: true
+  TruckCapacity;
+
+  @EndUserText.label: 'Unit'
+  TruckCapacityUnit;
+
+  @UI.fieldGroup: [ { qualifier: 'TRInfo', position: 70 } ]
+  ProcessingIndicator;  
+
+  @UI.fieldGroup: [ { qualifier: 'TRInfo', position: 80 } ]
+  @EndUserText.label: 'Container gross weight'
+  ContainerWeight; 
+  
+  @EndUserText.label: 'Unit'  
+  ContainerUnit;
+  
+  @UI.fieldGroup: [ { qualifier: 'DRInfo', position: 10 } ]
+  DriverName;
+
+  @UI.fieldGroup: [ { qualifier: 'DRInfo', position: 20 } ]
+  DriverPhone;
+
+  @UI.fieldGroup: [ { qualifier: 'DRInfo', position: 30 } ]
+  DriverLicense;
+
+  @UI.fieldGroup: [ { qualifier: 'DRInfo', position: 40 } ]
+  @EndUserText.label: 'SECURITY CHECK'  
+  WBSafetyCheck;
+
+  @UI.fieldGroup: [
+   { label: 'Get Tare Weight',
+     qualifier: 'WBInfoTare',
+     inline: true,
+     determining: false,
+     importance: #HIGH,
+     emphasized: true,
+     type: #FOR_ACTION,
+     dataAction: 'GetWBTareWeight',
+     invocationGrouping: #ISOLATED },
+   { label: 'Get Gross Weight',
+     qualifier: 'WBInfoGross',
+     inline: true,
+     importance: #MEDIUM,
+     determining: false,
+     emphasized: true,
+     type: #FOR_ACTION,
+     dataAction: 'GetWBGrossWeight',
+     invocationGrouping: #ISOLATED },     
+   { qualifier: 'WBInfoDevice',
+     position: 10 } ]
+  WBManual;
+
+  @UI.fieldGroup: [
+  { qualifier: 'WBInfoDevice',
+    position: 20 } ]
+  WBManualReason;
+
+  @UI.fieldGroup: [ { qualifier: 'WBInfoDevice', position: 30 } ]
+  WBDeviceID;
+
+  @UI.fieldGroup: [ { qualifier: 'WBInfoDevice', position: 40 } ]
+  WBNetWeight;
+
+  @UI.fieldGroup: [ { qualifier: 'WBInfoGross', position: 10 } ]
+  WBGrossWeight;
+
+  @UI.fieldGroup: [ {
+    label: 'User',
+    qualifier: 'WBInfoGross',
+    position: 20,
+    type: #AS_CONTACT,
+    value: '_WBGrossWeightUserContactCard' } ]
+  WBGrossWeightUser;
+
+  @UI.fieldGroup: [ {
+    label: 'Date',
+    qualifier: 'WBInfoGross',
+    position: 30 } ]
+  WBGrossWeightDate;
+
+  @UI.fieldGroup: [ {
+    label: 'Time',
+    qualifier: 'WBInfoGross',
+    position: 40 } ]
+  WBGrossWeightTime;
+
+  @UI.fieldGroup: [ {
+    qualifier: 'WBInfoTare',
+    position: 10 } ]
+  WBTareWeight;
+
+  @UI.fieldGroup: [ {
+    label: 'User',
+    qualifier: 'WBInfoTare',
+    position: 20,
+    type: #AS_CONTACT,
+    value: '_WBTareWeightUserContactCard' } ]
+  WBTareWeightUser;
+
+  @UI.fieldGroup: [ {
+    label: 'Date',
+    qualifier: 'WBInfoTare',
+    position: 30 } ]
+  WBTareWeightDate;
+
+  @UI.fieldGroup: [ {
+    label: 'Time',
+    qualifier: 'WBInfoTare',
+    position: 40 } ]
+  WBTareWeightTime;
+
+  @EndUserText.label: 'Unit'
+  WBUnit;
+
+  @UI.fieldGroup: [ {
+    label: 'Remarks',
+    qualifier: 'WBInfoRemarks',
+    position: 10 } ]
+  @UI.multiLineText: true
+  WBNotes;
+
+  @UI.fieldGroup: [
+  { label: 'Entry user',
+    qualifier: 'adminInfoEntry',
+    position: 10, 
+    type: #AS_CONTACT,
+    value: '_EntryUserContactCard' },
+  { label: 'CHECK IN',
+    qualifier: 'adminInfoEntry',
+    inline: true,
+    determining: false,
+    importance: #HIGH,
+    emphasized: true,
+    type: #FOR_ACTION,
+    dataAction: 'GetGPEntry',
+    invocationGrouping: #ISOLATED },
+  { label: 'CHECK OUT',
+    qualifier: 'adminInfoExit',
+    inline: true,
+    importance: #MEDIUM,
+    determining: false,
+    emphasized: true,
+    type: #FOR_ACTION,
+    dataAction: 'GetGPExit',
+    invocationGrouping: #ISOLATED
+  }]
+  EntryUser;
+  
+//  @UI.fieldGroup: [ { qualifier: 'adminInfoNotes', position: 10 } ]
+//  @EndUserText.label: 'Reason for entrance'
+//  @UI.multiLineText: true
+  @UI.hidden: true 
+  EntryReason;  
+  
+  @UI.fieldGroup: [ { qualifier: 'adminInfoEntry', position: 20 } ]
+  @EndUserText.label: 'Entry date'
+  EntryDate;
+
+  @UI.fieldGroup: [ { qualifier: 'adminInfoEntry', position: 30 } ]
+  @EndUserText.label: 'Entry time'
+  EntryTime;
+
+  @UI.fieldGroup: [ {
+      label: 'Exit user',
+      qualifier: 'adminInfoExit',
+      position: 10, 
+      type: #AS_CONTACT,
+      value: '_ExitUserContactCard' } ]
+  ExitUser;
+
+  @UI.fieldGroup: [ { qualifier: 'adminInfoExit', position: 20 } ]
+  @EndUserText.label: 'Exit date'
+  ExitDate;
+
+  @UI.fieldGroup: [ { qualifier: 'adminInfoExit', position: 30 } ]
+  @EndUserText.label: 'Exit time'
+  ExitTime;
+  
+  @UI.hidden: true
+  CostRelevant;
+
+  @UI.hidden: true
+  CostCalcStatus;  
+}

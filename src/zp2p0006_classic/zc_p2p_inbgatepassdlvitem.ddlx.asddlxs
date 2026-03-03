@@ -1,0 +1,52 @@
+@Metadata.layer: #CORE
+@UI.createHidden: true
+
+annotate entity ZC_P2P_INBGATEPASSDLVITEM with
+{
+  @UI.lineItem: [ {
+    importance: #HIGH,
+    position: 30,
+    type: #WITH_INTENT_BASED_NAVIGATION,
+    semanticObject: 'InboundDelivery',
+    semanticObjectAction: 'displayInWebGUI',
+    semanticObjectBinding: [{
+      element: 'InboundDelivery',
+      localElement: 'DeliveryDocument' }]
+  }]
+  DeliveryDocument;
+
+  @UI.lineItem: [ { 
+    importance: #HIGH,
+    position: 40 } ]
+  DeliveryDocumentItem;
+  
+  @UI.lineItem: [ {
+    importance: #HIGH, 
+    position: 50 } ]
+  Plant;
+  
+  @UI.lineItem: [ { 
+    importance: #HIGH,
+    position: 60 } ]
+  StorageLocation; 
+  
+  @UI.lineItem: [ { 
+    importance: #HIGH,
+    position: 70 } ]
+  Material;
+  
+  @UI.lineItem: [ { 
+    importance: #HIGH,
+    position: 80 } ]
+  CountryOfOrigin;  
+  
+  @UI.lineItem: [ { 
+    importance: #HIGH,   
+    position: 90 } ]  
+  OrderQuantity;
+  
+  @UI.lineItem: [ { 
+    importance: #HIGH,   
+    position: 100 } ]
+  ActualDeliveryQuantity;
+}

@@ -1,0 +1,94 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+    typeName: 'Delivery',
+    title: { value: 'DeliveryDocument', type: #STANDARD },
+    typeImageUrl: 'sap-icon://document' }
+
+annotate entity ZC_P2P_INBGATEPASSITEM with
+{
+  @UI.facet: [
+     { purpose: #STANDARD,
+       type: #COLLECTION,
+       id: 'GeneralCollection',
+       position: 10,
+       label: 'General' },
+       
+     { purpose: #STANDARD,
+       type: #FIELDGROUP_REFERENCE,
+       targetQualifier: 'HeadInfo',
+       position: 10,
+       parentId: 'GeneralCollection',
+       label: 'Delivery' },
+       
+     { purpose: #STANDARD,
+       type: #FIELDGROUP_REFERENCE,
+       targetQualifier: 'WBInfo',
+       position: 20,
+       parentId: 'GeneralCollection',
+       label: 'Weighbridge information' },
+              
+     { purpose: #STANDARD,
+       type: #LINEITEM_REFERENCE,
+       targetElement: '_InbGatePassDlvItem',
+       position: 30,
+       label: 'Items' }]
+
+  @UI.hidden: true
+  GatePassID;
+
+  @EndUserText.label: 'Gate pass item ID'
+  @UI.lineItem: [ 
+    { position: 20 },
+    { type: #FOR_ACTION,
+      dataAction: 'PrintNote',
+      label: 'Print delivery note',
+      importance: #MEDIUM,
+      hidden: true,
+      position: 901 }]  
+  GatePassItemID;
+
+  @EndUserText.label: 'Delivery'
+
+  @UI.lineItem: [ {
+    position: 30,
+    type: #WITH_INTENT_BASED_NAVIGATION,
+    semanticObject: 'InboundDelivery',
+    semanticObjectAction: 'displayInWebGUI',
+    semanticObjectBinding: [{
+      element: 'InboundDelivery',
+      localElement: 'DeliveryDocument' }]
+  }]
+  DeliveryDocument;
+
+  @UI.fieldGroup: [ {
+    label: 'Supplier', 
+    qualifier: 'HeadInfo', 
+    position: 10 } ]
+  Supplier;
+ 
+  @UI.fieldGroup: [ {
+    label: 'Supplier invoice', 
+    qualifier: 'HeadInfo', 
+    position: 20 } ]
+   
+  SupplierInvoice;
+
+  @UI.fieldGroup: [ { 
+    qualifier: 'WBInfo', 
+    position: 20 } ]
+  WBGrossWeight;
+  
+  @UI.fieldGroup: [ {
+    qualifier: 'WBInfo',
+    position: 30 } ]
+  WBTareWeight;
+    
+  @UI.fieldGroup: [ { 
+    qualifier: 'WBInfo', 
+    position: 40 } ]
+  WBNetWeight;
+
+  @EndUserText.label: 'Unit'
+  WBUnit;  
+}

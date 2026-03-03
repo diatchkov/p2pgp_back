@@ -1,0 +1,80 @@
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'GPC: outbound gate pass root'
+
+@ObjectModel.semanticKey: [ 'GatePassID' ]
+@Metadata.allowExtensions: true
+
+define root view entity ZR_P2P_OTBGATEPASS
+  as select from ZI_P2P_GATEPASS
+  composition [0..*] of ZR_P2P_OTBGATEPASSITEM as _Item
+{
+  key GatePassID,
+      GatePassType,
+      GatePassDirection,
+      ProcessingIndicator,
+      TranspPlanPoint,
+      BillOfLanding,
+      OrderNumber,
+      OrderNumberItem,
+      RFID,
+      RadiationCertificate,
+      SealNumber,
+      Transporter,
+      ContainerID,
+      TruckGUID,
+      TruckID,
+      TruckType,
+      TruckInsuranceNumber,
+      TruckInsuranceDate,
+      TruckCapacity,
+      TruckCapacityUnit,
+      DriverGUID,
+      DriverName,
+      DriverPhone,
+      DriverLicense,
+      WBNotRelevant, 
+      WBSafetyCheck,
+      WBManual,
+      WBManualReason,
+      WBNotes,
+      WBDeviceID,
+      WBGrossWeight,
+      WBTareWeight,
+      WBNetWeight,
+      WBUnit,
+      EntryDate,
+      EntryTime,
+      EntryUser,
+      EntryReason, 
+      ExitDate,
+      ExitTime,
+      ExitUser,
+      isBulk,
+      isScrap,
+      isReturn,
+      isLogicallyDeleted,
+      ShipmentStatus,
+      Status,
+      CostRelevant,
+      CostCalcStatus,      
+      RadiationCertificateBody,
+      RadiationCertificateFile,
+      RadiationCertificateType,    
+      ContainerWeight, 
+      ContainerUnit,        
+      Pieces,
+      ZZCreatedTimestamp,
+      ZZChangedTimestamp,
+
+      /* Associations */
+      _Status, 
+      _Item,
+      _ShipmentType,
+      _TranspPlanPoint,
+      _Transporter,
+      _TruckType,
+      _WBCapture,
+      _WBManualReason,
+      _ProcessingIndicator
+} where GatePassType = 'Z001' or GatePassType = 'Z002' or GatePassType = 'Z004' 
+

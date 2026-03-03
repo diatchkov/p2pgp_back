@@ -1,0 +1,125 @@
+projection;
+strict ( 2 );
+use draft;
+use side effects;
+
+define behavior for ZC_P2P_INBGATEPASS alias InbGatePass
+{
+  field ( readonly ) GatePassID;
+
+  use create;
+  use update;
+  use delete;
+
+  use action Resume;
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Prepare;
+
+  use action GetWBGrossWeight;
+  use action GetWBTareWeight;
+  use action GetGPEntry;
+  use action GetGPExit;
+  use action PrintGPEntry;
+  use action PrintGPExit;
+  use action PostGR;
+  use action PostGItoCrusher;
+
+  use association _Item { create; }
+  use association _PO { create; }
+
+  side effects
+  {
+    field WBManual affects
+      permissions ( field ( WBManualReason, WBDeviceID, WBGrossWeight, WBTareWeight, WBUnit ),
+      action ( GetWBGrossWeight, GetWBTareWeight ) );
+
+    field TranspPlanPoint affects
+      field ( GatePassType );
+
+    field Transporter affects
+      permissions ( field ( BillOfLanding ) ),
+      field ( GatePassType );
+
+    field OrderNumber affects
+      field ( Plant, StorageLocation );
+
+    field WBGrossWeight affects
+      field ( WBNetWeight );
+
+    field WBTareWeight affects
+      field ( WBNetWeight );
+
+    field isScrap affects
+      permissions ( field ( RadiationCertificateBody, OrderNumber, OrderNumberItem, StorageLocation ) ),
+      field ( isBulk );
+
+    field isBulk affects
+      permissions ( field ( OrderNumber, OrderNumberItem, StorageLocation ) );
+
+    field TruckType affects
+      permissions ( field ( ContainerID, SealNumber ) ),
+      field ( isBulk );
+
+    action GetGPEntry affects
+      field ( EntryDate, EntryTime, EntryUser ),
+      permissions ( action ( GetGPEntry, GetWBGrossWeight, PrintGPEntry ) ),
+      entity _EntryUserContactCard;
+
+    action GetWBGrossWeight affects
+      field ( WBGrossWeight, WBNetWeight, WBUnit, WBGrossWeightUser, WBGrossWeightDate, WBGrossWeightTime ),
+      permissions ( action ( GetWBGrossWeight, GetWBTareWeight ) ),
+      entity _WBGrossWeightUserContactCard;
+
+    action GetWBTareWeight affects
+      field ( WBTareWeight, WBNetWeight, WBUnit, WBTareWeightUser, WBTareWeightDate, WBTareWeightTime ),
+      permissions ( action ( PostGR, PostGItoCrusher, GetGPExit ) ),
+      entity _WBTareWeightUserContactCard;
+
+    action GetGPExit affects
+      field ( ExitDate, ExitTime, ExitUser ),
+      permissions ( action ( GetGPExit, GetWBGrossWeight, GetWBTareWeight, PrintGPExit ) ),
+      entity _ExitUserContactCard;
+  }
+
+}
+
+define behavior for ZC_P2P_INBGATEPASSITEM alias InbGatePassItem
+{
+
+  field ( readonly )
+  GatePassID,
+  GatePassItemID;
+
+  use update;
+  use delete;
+
+  use action PrintNote;
+
+  use association _InbGatePass;
+  use association _InbGatePassDlvItem;
+}
+
+define behavior for ZC_P2P_INBGATEPASSDLVITEM alias InbGatePassDlvItem
+{
+  use update;
+  use delete;
+
+  use association _InbGatePassItem;
+  use association _InbGatePass;
+}
+
+
+define behavior for ZC_P2P_GPC_PO alias InbGatePassPO
+{
+
+  field ( readonly )
+  GatePassID,
+  GatePassItemID;
+
+  use update;
+  use delete;
+
+  use association _InbGatePass;
+}

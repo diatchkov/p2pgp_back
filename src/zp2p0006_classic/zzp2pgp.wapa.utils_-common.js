@@ -1,0 +1,3 @@
+sap.ui.define(["sap/m/PDFViewer"],function(e){"use strict";return{openPDFFromBase64:function(r){if(!r||!r.MimeCont){return null}try{var t=r.MimeCont;var n=atob(t);var a=new Uint8Array(n.length);for(var o=0;o<n.length;o++){a[o]=n.charCodeAt(o)}var i=new B+
+lob([a.buffer],{type:r.MimeType||"application/pdf"});var u=URL.createObjectURL(i);var c=new e;c.setSource(u);c.setTitle(r.FileName||"Document");c.open();return c}catch(e){console.error("PDF Error:",e);return null}}}});                                     
+//# sourceMappingURL=common.js.map                                                                                                                                                                                                                             

@@ -1,0 +1,4 @@
+define service ZP2P_UI_INBSTDEF {
+  expose ZC_P2P_DEFINBSHIPTYPES as ZP2PDefInbShipTypes;
+  expose ZC_P2P_DEFINBSHIPTYPE as ZP2PDefInbShipType;
+}

@@ -1,0 +1,80 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+    typeName: 'Delivery',
+    title: { value: 'DeliveryDocument', type: #STANDARD },
+    typeImageUrl: 'sap-icon://document' }
+    
+annotate entity ZC_P2P_OTBGATEPASSITEM with
+{
+  @UI.facet: [
+     { purpose: #STANDARD,
+       type: #COLLECTION,
+       id: 'GeneralCollection',
+       position: 10,
+       label: 'General' },
+       
+     { purpose: #STANDARD,
+       type: #FIELDGROUP_REFERENCE,
+       targetQualifier: 'HeadInfo',
+       position: 10,
+       parentId: 'GeneralCollection',
+       label: 'Delivery' },
+       
+     { purpose: #STANDARD,
+       type: #FIELDGROUP_REFERENCE,
+       targetQualifier: 'WBInfo',
+       position: 20,
+       parentId: 'GeneralCollection',
+       label: 'Weighbridge information' },
+       
+     { purpose: #STANDARD,
+       type: #LINEITEM_REFERENCE,
+       targetElement: '_OtbGatePassDlvItem',
+       position: 30,
+       label: 'Items' } ]
+
+  @UI.hidden: true
+  GatePassID;
+
+  @UI.lineItem: [ { position: 20 } ]
+  @EndUserText.label: 'Gate pass item ID'
+  GatePassItemID;
+
+  @UI.lineItem: [ {
+      position: 30,
+      type: #WITH_INTENT_BASED_NAVIGATION,
+      semanticObject: 'OutboundDelivery',
+      semanticObjectAction: 'displayInWebGUI',
+      semanticObjectBinding: [{
+        element: 'OutboundDelivery',
+        localElement: 'DeliveryDocument' }]
+  }]
+  
+  @EndUserText.label: 'Delivery'
+  DeliveryDocument;
+
+  @UI.fieldGroup: [ {
+    label: 'Customer', 
+    qualifier: 'HeadInfo', 
+    position: 10 } ]
+  Customer;
+
+  @UI.fieldGroup: [ { 
+    qualifier: 'WBInfo', 
+    position: 20 } ]
+  WBGrossWeight;
+  
+  @UI.fieldGroup: [ {
+    qualifier: 'WBInfo',
+    position: 30 } ]
+  WBTareWeight;
+    
+  @UI.fieldGroup: [ { 
+    qualifier: 'WBInfo', 
+    position: 40 } ]
+  WBNetWeight;
+
+  @EndUserText.label: 'Unit'
+  WBUnit;    
+}

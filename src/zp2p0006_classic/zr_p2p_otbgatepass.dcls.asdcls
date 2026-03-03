@@ -1,0 +1,6 @@
+@EndUserText.label: 'Access control for ZR_P2P_OTBGATEPASS'
+@MappingRole: true
+define role ZR_P2P_OTBGATEPASS {
+  grant select on ZR_P2P_OTBGATEPASS
+  where inheriting conditions from entity ZI_P2P_GATEPASS;           
+}

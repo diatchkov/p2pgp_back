@@ -1,0 +1,5 @@
+@MappingRole: true
+define role ZC_P2P_DefInbShipType {
+  grant select on ZC_P2P_DefInbShipType
+  where INHERITING CONDITIONS FROM ENTITY ZI_P2P_DefInbShipType;
+}

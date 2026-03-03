@@ -1,0 +1,5 @@
+CLASS zbp_r_p2p_inbgatepass DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zr_p2p_inbgatepass.
+ENDCLASS.
+
+CLASS zbp_r_p2p_inbgatepass IMPLEMENTATION.
+ENDCLASS.

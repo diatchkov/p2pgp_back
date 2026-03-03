@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_INTF" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOINTERF>
+    <CLSNAME>ZIF_P2P_GP</CLSNAME>
+    <LANGU>E</LANGU>
+    <DESCRIPT>Gate pass: interface</DESCRIPT>
+    <EXPOSURE>2</EXPOSURE>
+    <STATE>1</STATE>
+    <UNICODE>X</UNICODE>
+   </VSEOINTERF>
+   <DESCRIPTIONS_SUB>
+    <SEOSUBCOTX>
+     <CMPNAME>CHANGE</CMPNAME>
+     <SCONAME>IV_RFC</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Data element for domain BOOLE: TRUE (=&apos;X&apos;) and FALSE (=&apos; &apos;)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>CHANGE</CMPNAME>
+     <SCONAME>RT_RETURN</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Error Messages</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SET_GROSS_WEIGHT</CMPNAME>
+     <SCONAME>IS_WEIGHT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Weighbridge integration: weight</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SET_TARE_WEIGHT</CMPNAME>
+     <SCONAME>IS_WEIGHT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Weighbridge integration: weight</DESCRIPT>
+    </SEOSUBCOTX>
+   </DESCRIPTIONS_SUB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,110 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_P2P_OTBGATEPASS alias OtbGatePass
+{
+  field ( readonly ) GatePassID;
+
+  use create;
+  use update;
+  use delete;
+
+  use action Resume;
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Prepare;
+
+  use action GetWBGrossWeight;
+  use action GetWBTareWeight;
+  use action GetGPEntry;
+  use action GetGPExit;
+  use action PrintGPEntry;
+  use action PrintGPExit;
+  use action PostGI;
+  use action PostGIWithTolerance;
+
+  use association _Item { create; }
+
+  side effects
+  {
+    field WBManual affects permissions (
+      field ( WBManualReason, WBDeviceID, WBGrossWeight, WBTareWeight, WBUnit ) ,
+      action ( GetWBGrossWeight, GetWBTareWeight ) );
+
+    field Transporter affects
+      field ( GatePassType );
+
+    field OrderNumber affects
+      field ( GatePassType );
+
+    field ProcessingIndicator affects
+      field ( GatePassType );
+
+    field WBGrossWeight affects
+      field ( WBNetWeight );
+
+    field WBTareWeight affects
+      field ( WBNetWeight );
+
+    field TruckType affects permissions (
+      field ( ContainerID, SealNumber, ContainerWeight )  ),
+      field ( isBulk );
+
+    action GetGPEntry affects
+      field ( EntryDate, EntryTime, EntryUser ),
+      permissions ( action ( GetGPEntry, GetWBTareWeight, PrintGPEntry ) ),
+      entity _EntryUserContactCard;
+
+    action GetWBGrossWeight affects
+      field ( WBGrossWeight, WBNetWeight, WBUnit, WBGrossWeightUser, WBGrossWeightDate, WBGrossWeightTime ),
+      permissions ( action ( GetWbGrossWeight, GetWBTareWeight, GetGPExit, PostGI  ) ),
+      entity _WBGrossWeightUserContactCard;
+
+    action GetWBTareWeight affects
+      field ( WBTareWeight, WBNetWeight, WBUnit, WBTareWeightUser, WBTareWeightDate, WBTareWeightTime ),
+      permissions ( action ( GetWBTareWeight, GetWBGrossWeight ) ),
+      entity _WBTareWeightUserContactCard;
+
+    action GetGPExit affects
+      field ( ExitDate, ExitTime, ExitUser ),
+      permissions ( action ( GetGPExit, GetWBTareWeight, GetWBGrossWeight, PrintGPExit, PostGI ) ),
+      entity _ExitUserContactCard;
+  }
+}
+
+define behavior for ZC_P2P_OTBGATEPASSITEM alias OtbGatePassItem
+{
+  field ( readonly ) GatePassID, GatePassItemID;
+
+  use update;
+  use delete;
+
+  use action PrintNote;
+  use action PrintPlanNote;
+  use action PrintQualCert;
+  use action PrintTaxInvoice;
+  use action PrintAdvInvoice;
+
+  use association _OtbGatePass;
+  use association _OtbGatePassDlvItem;
+}
+
+define behavior for ZC_P2P_OTBGATEPASSDLVITEM alias OtbGatePassDlvItem
+{
+  use update;
+  use delete;
+
+  use action BatchSplit;
+
+  use association _OtbGatePassItem;
+  use association _OtbGatePass;
+
+  side effects
+  {
+    action BatchSplit affects entity _OtbGatePassItem;
+    field Batch affects field ( BatchWeight, BatchUOM );
+    field Billets affects entity _OtbGatePassItem;
+  }
+}
